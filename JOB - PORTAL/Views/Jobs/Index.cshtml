@@ -1,0 +1,86 @@
+﻿@model IEnumerable<JOB___PORTAL.Models.Jobs>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Jobs Posted</h1>
+<div class="alert-info">
+    @TempData["Message"]
+    @ViewBag.Message
+</div>
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary">Create a New Vacancy</a>
+</p>
+<a asp-action="Your_Profile" class="btn btn-outline-warning">Profile</a>
+<a asp-action="ShowSeeker" class="btn btn-outline-success">All Seeker</a>
+<a asp-controller="Provider" asp-action="Logout" class="btn btn-outline-danger">Logout</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Company_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillsRequired)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastApplyDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.Company_Name)
+              </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SkillsRequired)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastApplyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostedDate)
+            </td>
+            <td>
+             <a asp-action="Edit" asp-route-id="@item.JobID" class="btn btn-outline-primary" onclick="return confirm('Are You Sure Do Edit @item.Company_Name?')">Edit</a> 
+             <a asp-action="Delete" asp-route-id="@item.JobID" class="btn btn-outline-danger"onclick="return confirm('Are You Sure Delete This Job @item.Company_Name,@item.Description?')">Delete</a> 
+             <a asp-action="ShowApplicant" asp-route-id="@item.JobID" class="btn btn-outline-info"onclick="return confirm('Are You Sure To See ShowApplicant @item.Title?')">Show Applicant</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
